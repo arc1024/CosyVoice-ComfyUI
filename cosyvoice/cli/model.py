@@ -61,9 +61,9 @@ class CosyVoiceModel:
         self.hift.to(self.device).eval()
 
     def load_jit(self, llm_text_encoder_model, llm_llm_model):
-        llm_text_encoder = torch.jit.load(llm_text_encoder_model)
+        llm_text_encoder = torch.jit.load(llm_text_encoder_model, map_location=self.device)
         self.llm.text_encoder = llm_text_encoder
-        llm_llm = torch.jit.load(llm_llm_model)
+        llm_llm = torch.jit.load(llm_llm_model, map_location=self.device)
         self.llm.llm = llm_llm
 
     def llm_job(self, text, prompt_text, llm_prompt_speech_token, llm_embedding, uuid):
